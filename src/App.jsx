@@ -1,20 +1,24 @@
 import { useState ,useEffect} from 'react';
 
 function App() {
-// fetches quotes from API call and stores result to local storage
+  // fetches quotes from API call and stores result to local storage
+  console.log(2)
   const getQuotes = async () => {
     const quote = await fetch("https://gist.githubusercontent.com/camperbot/5a022b72e96c4c9585c32bf6a75f62d9/raw/e3c6895ce42069f0ee7e991229064f167fe8ccdc/quotes.json");
     const quotesObject = await quote.json();
     const quotes = await quotesObject.quotes
     const quoteString = JSON.stringify(quotes)
     localStorage.setItem("quotes",quoteString);
-    console.log(quotes)
+    console.log("1")
+    // console.log(quotes)
     return quotes;
   }
   
-  useEffect(() => {
-    getQuotes();
-  }, [])
+  getQuotes();
+
+  // useEffect(() => {
+  //   getQuotes();
+  // }, [])
   
 
 // gets array from local storage and stores it in variable "quotes" 
@@ -22,14 +26,15 @@ function App() {
   const quotes = JSON.parse(quoteString)
 
 // random number generator 
-  const randomNumber = Math.floor(Math.random() * quotes.length)
-  
+  const randomNumber = () => {
+    return Math.floor(Math.random() * quotes.length)
+  } 
 // use state hook sets initial quote to random quote
     let [quote , setQuote] = useState(quotes[randomNumber]);
 
 // function for changing quotes on click
     function newQuote () {
-      setQuote(quotes[randomNumber]);
+      setQuote(quotes[randomNumber()]);
     }
 
 // url for tweet
