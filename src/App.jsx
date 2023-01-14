@@ -26,11 +26,13 @@ function App() {
   const quotes = JSON.parse(quoteString)
 
 // random number generator 
+  const randomNumberVariable = Math.floor(Math.random() * quotes.length)
+
   const randomNumber = () => {
     return Math.floor(Math.random() * quotes.length)
   } 
 // use state hook sets initial quote to random quote
-    let [quote , setQuote] = useState(quotes[randomNumber]);
+    let [quote , setQuote] = useState(quotes[randomNumber()]);
 
 // function for changing quotes on click
     function newQuote () {
@@ -38,8 +40,7 @@ function App() {
     }
 
 // url for tweet
-    let url =  `https://twitter.com/intent/tweet?text=${quote.quote} by ${quote.author}`
-    console.log(url)
+    let url =  `https://twitter.com/intent/tweet?text=${quote.quote} by ${quote.author}`          
     
 // returning jsx   
   return (
